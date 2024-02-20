@@ -9,6 +9,7 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class GridComponent {
   @Input() items: any;
   @Input() columns: any;
+  @Input() search: any;
   @Input() count: any;
   @Input() total: any;
   @Output() onSelect = new EventEmitter<number>();

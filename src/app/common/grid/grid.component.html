@@ -57,8 +57,9 @@
             </tbody>
         </table>
 
-        <div class="col-6" *ngIf="items.length != total">
-            <button type="submit" (click)="loadmore()" class="btn btn-info">Load More...</button>
+        <div class="col-6" *ngIf="(items.length != total) && !search">
+            <button type="submit" (click)="loadmore()" class="btn btn-info">Load More...{{total}} -
+                {{items.length}}</button>
         </div>
 
     </div>

@@ -7,5 +7,6 @@
         <button class="btn btn-success" (click)="edit(0)">Add Event</button>
     </div>
 </div>
-<app-grid [items]="events | search: 'type' : searchField" [columns]="columns" [total]="total" [count]="count"
-    (onSelect)="select($event)" (onEdit)="edit($event)" (onDelete)="delete($event)" (onLoadMore)="loadMore()" />
+<app-grid [items]="events | search: 'type' : searchField" [search]="searchField" [columns]="columns" [total]="total"
+    [count]="count" (onSelect)="select($event)" (onEdit)="edit($event)" (onDelete)="delete($event)"
+    (onLoadMore)="loadMore()" />
