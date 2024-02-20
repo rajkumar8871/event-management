@@ -12,15 +12,22 @@ import { EventService } from './services/event.service';
 })
 export class EventsComponent implements OnInit {
 
+  count: number = 5;
+  total: number = 0;
   searchField: string = '';
   searchPlaceholder: string = 'Search by Type...';
   columns = Columns;
+  allEvents: Event[] = [];
   events: Event[] = [];
 
-  constructor(private router: Router, private eventService: EventService) {}
+  constructor(private router: Router, private eventService: EventService) { }
 
   ngOnInit(): void {
-    this.eventService.getEvents.subscribe(e => this.events = e);
+    this.eventService.getEvents.subscribe(events => {
+      this.allEvents = events;
+      this.total = this.allEvents.length;
+      this.events = this.allEvents.slice(0, this.count);
+    });
   }
 
   search(search: string) {
@@ -37,6 +44,13 @@ export class EventsComponent implements OnInit {
 
   delete(id: number) {
     this.events = this.events.filter(f => f.id != id);
+    this.allEvents = this.allEvents.filter(f => f.id != id);
+    this.total = this.allEvents.length;
+  }
+
+  loadMore() {
+    const moreEvents = this.allEvents.slice(this.events.length, this.events.length + this.count);
+    this.events = [...this.events, ...moreEvents];
   }
 
 }

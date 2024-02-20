@@ -9,9 +9,12 @@ import { ChangeDetectionStrategy, Component, EventEmitter, Input, Output } from 
 export class GridComponent {
   @Input() items: any;
   @Input() columns: any;
+  @Input() count: any;
+  @Input() total: any;
   @Output() onSelect = new EventEmitter<number>();
   @Output() onEdit = new EventEmitter<number>();
   @Output() onDelete = new EventEmitter<number>();
+  @Output() onLoadMore = new EventEmitter();
 
   selectItem(item: any) {
     this.onSelect.emit(item.id);
@@ -22,9 +25,11 @@ export class GridComponent {
   }
 
   delete(item: any) {
-    if(confirm(`Are you sure you want to delete it`)) {
-      this.onDelete.emit(item.id);
-    }
+    if (confirm(`Are you sure you want to delete it`)) this.onDelete.emit(item.id);
+  }
+
+  loadmore() {
+    this.onLoadMore.emit();
   }
 
 }

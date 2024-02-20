@@ -92,7 +92,7 @@ export class EventEditComponent implements OnInit {
     const event = this.form.value;
     event.image = './assets/images/event.jpg';
 
-    if (this.imageURL && this.imageURL != '') { console.log('inn'); event.image = this.imageURL; }
+    if (this.imageURL && this.imageURL != '') event.image = this.imageURL;
 
     if (this.id > 0) {
       const events = this.events.map((m: Event) => {
