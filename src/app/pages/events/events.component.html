@@ -1,0 +1,14 @@
+<div class="row mt-3">
+    <div class="col">
+        <app-search [searchField]="searchField" [placeholder]="searchPlaceholder" (onSearch)="search($event)"></app-search>
+    </div>
+    <div class="col">
+        <button class="btn btn-success" (click)="edit(0)">Add Event</button>
+    </div>
+</div>
+<app-grid 
+[items]="events | search: 'type' : searchField" 
+[columns]="columns" 
+(onSelect)="select($event)"
+(onEdit)="edit($event)"
+(onDelete)="delete($event)"/>

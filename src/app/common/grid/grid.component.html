@@ -1,0 +1,58 @@
+<div class="card col-lg-8  mx-auto mt-3">
+    <div class="card-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <ng-container *ngFor="let column of columns">
+                        <th *ngIf="column.type!='action' || (column.type==='action' && (column.actions.isEditable || column.actions.isDeletable))
+                        ">{{ column.title.caption }}</th>
+                    </ng-container>
+                </tr>
+            </thead>
+            <tbody style="cursor: pointer">
+                <tr *ngFor="let record of items; let i=index">
+                    <td *ngFor="let column of columns">
+
+                        <div *ngIf="column.type==='text'" tabindex="1" (click)="selectItem(record)"
+                            (keydown)="selectItem(record)">
+                            {{ record[column.data.field] }}
+                        </div>
+
+                        <div *ngIf="column.type==='img'" tabindex="1" (click)="selectItem(record)"
+                            (keydown)="selectItem(record)">
+                            <img src="{{ record[column.data.field] }}" height="100" width="100" class="shadow-lg"
+                                alt="text_image">
+                        </div>
+
+                        <div *ngIf="column.type==='subfield'" tabindex="1" (click)="selectItem(record)"
+                            (keydown)="selectItem(record)">
+                            <ng-container *ngFor="let sub of record[column.data.field] | keyvalue">
+                                {{ sub.key }}: {{ sub.value }},
+                            </ng-container>
+                        </div>
+
+                        <div *ngIf="column.type==='date'" tabindex="1" (click)="selectItem(record)"
+                            (keydown)="selectItem(record)">
+                            {{ record[column.data.field] | date: 'dd-MM-YYYY' }}
+                        </div>
+
+                        <div *ngIf="column.type==='action' && (column.actions.isEditable || column.actions.isDeletable)" tabindex="1">
+                            <div class="row">
+                                <div class="col-6" *ngIf="column.actions.isEditable">
+                                    <button type="submit" (click)="edit(record)" class="btn btn-primary">Edit</button>
+                                </div>
+                                <div class="col-6" *ngIf="column.actions.isDeletable">
+                                    <button type="submit" (click)="delete(record)" class="btn btn-danger">Delete</button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+                <tr *ngIf="items.length === 0">
+                    <td class="text-center" [attr.colspan]="columns.length"> No Data Found</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

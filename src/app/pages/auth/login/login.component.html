@@ -1,0 +1,45 @@
+<div class="card col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
+    <div class="card-body px-lg-5 pt-4">
+        <h4 class="text-center ">Sign in</h4>
+        <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="col-12">
+                <label for="mobile" class="form-label">Mobile No.</label>
+                <input type="text" class="form-control" maxlength="10" id="mobile" placeholder="0123456789"
+                    formControlName="mobile" [ngClass]="{ 'is-invalid': submitted && f['mobile'].errors }">
+                @if (submitted && f['mobile'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['mobile'].errors['required']) {
+                    <div>Mobile No. is required</div>
+                    }
+                    @if (f['mobile'].errors['pattern']) {
+                    <div>Mobile No. must be number</div>
+                    }
+                    @if (!f['mobile'].errors['pattern'] && f['mobile'].errors['minlength']) {
+                    <div>Mobile No. must be at least 10 characters</div>
+                    }
+                </div>
+                }
+            </div>
+            <div class="col-12" *ngIf="isOtpBox">
+                <label for="otp" class="form-label">Otp</label>
+                <input type="text" class="form-control" id="otp" placeholder="123456" maxlength="6"
+                    formControlName="otp" [ngClass]="{ 'is-invalid': submitted && f['otp'].errors }">
+                @if (submitted && f['otp'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['otp'].errors['required']) {
+                    <div>Otp is required</div>
+                    }
+                    @if (f['otp'].errors['minlength']) {
+                    <div>Otp must be at least 6 characters</div>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">{{ isOtpBox ? 'Sign in' : 'Send Otp' }}</button>
+            </div>
+
+        </form>
+    </div>
+</div>

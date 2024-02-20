@@ -1,0 +1,157 @@
+<div class="card col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
+    <div class="card-body px-lg-5 pt-4">
+        <h4 class="text-center ">{{title}} Event</h4>
+        <form class="row g-3" [formGroup]="form" (ngSubmit)="onSubmit()">
+
+            <div class="col-12">
+                <label for="type" class="form-label">Type</label>
+                <select class="form-select" formControlName="type"
+                    [ngClass]="{ 'is-invalid': submitted && f['type'].errors }" aria-label="Default select example">
+                    <option selected value="">Select Type</option>
+                    <option [value]="type" *ngFor="let type of types;">{{type}}</option>
+                </select>
+                @if (submitted && f['type'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['type'].errors['required']) {
+                    <div>Type is required</div>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="col-12">
+                <label for="date" class="form-label">Date</label>
+                <input type="datetime-local" class="form-control" id="date" formControlName="date"
+                    [ngClass]="{ 'is-invalid': submitted && f['date'].errors }">
+                @if (submitted && f['date'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['date'].errors['required']) {
+                    <div>Date is required</div>
+                    }
+                </div>
+                }
+            </div>
+
+            <div class="col-12">
+                <label for="gender" class="form-label">Gender</label>
+                <select class="form-select" formControlName="gender"
+                    [ngClass]="{ 'is-invalid': submitted && f['gender'].errors }" aria-label="Default select example">
+                    <option selected value="">Select Gender</option>
+                    <option [value]="gender" *ngFor="let gender of genders;">{{gender}}</option>
+                </select>
+                @if (submitted && f['gender'].errors) {
+                <div class="invalid-feedback">
+                    @if (f['gender'].errors['required']) {
+                    <div>Gender is required</div>
+                    }
+                </div>
+                }
+            </div>
+
+            <div [ngClass]="imageURL ? 'col-6' : 'col-12'">
+                <label for="image" class="form-label">Image</label>
+                <input type="file" accept="image/*" (change)="showPreview($event)" class="form-control" id="image">
+            </div>
+            <div class="col-6" *ngIf="imageURL && imageURL !== ''">
+                <img [src]="imageURL" height="80" width="80">
+            </div>
+
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body" formGroupName="location">
+                        <h5 class="text-center "> Location </h5>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label for="country" class="form-label">Country</label>
+                                <input type="text" class="form-control" id="country" placeholder="Enter Country"
+                                    formControlName="country"
+                                    [ngClass]="{ 'is-invalid': submitted && locationControls['country'].errors }">
+
+                                @if (submitted && locationControls['country'].errors) {
+                                <div class="invalid-feedback">
+                                    @if (locationControls['country'].errors['required']) {
+                                    <div>Country is required</div>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <div class="col-12">
+                                <label for="state" class="form-label">State</label>
+                                <input type="text" class="form-control" id="state" placeholder="Enter State"
+                                    formControlName="state"
+                                    [ngClass]="{ 'is-invalid': submitted && locationControls['state'].errors }">
+
+                                @if (submitted && locationControls['state'].errors) {
+                                <div class="invalid-feedback">
+                                    @if (locationControls['state'].errors['required']) {
+                                    <div>State is required</div>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <div class="col-12">
+                                <label for="city" class="form-label">City</label>
+                                <input type="text" class="form-control" id="city" placeholder="Enter City"
+                                    formControlName="city"
+                                    [ngClass]="{ 'is-invalid': submitted && locationControls['city'].errors }">
+
+                                @if (submitted && locationControls['city'].errors) {
+                                <div class="invalid-feedback">
+                                    @if (locationControls['city'].errors['required']) {
+                                    <div>City is required</div>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <div class="col-12">
+                                <label for="street" class="form-label">Street</label>
+                                <input type="text" class="form-control" id="street" placeholder="Enter Street"
+                                    formControlName="street"
+                                    [ngClass]="{ 'is-invalid': submitted && locationControls['street'].errors }">
+
+                                @if (submitted && locationControls['street'].errors) {
+                                <div class="invalid-feedback">
+                                    @if (locationControls['street'].errors['required']) {
+                                    <div>Street is required</div>
+                                    }
+                                </div>
+                                }
+                            </div>
+
+                            <div class="col-12">
+                                <label for="zipcode" class="form-label">Zipcode</label>
+                                <input type="text" class="form-control" maxlength="6" id="zipcode"
+                                    placeholder="Enter Zipcode" formControlName="zipcode"
+                                    [ngClass]="{ 'is-invalid': submitted && locationControls['zipcode'].errors }">
+
+                                @if (submitted && locationControls['zipcode'].errors) {
+                                <div class="invalid-feedback">
+                                    @if (locationControls['zipcode'].errors['required']) {
+                                    <div>Zipcode is required</div>
+                                    }
+                                    @if (locationControls['zipcode'].errors['pattern']) {
+                                    <div>Zipcode must be number</div>
+                                    }
+                                    @if (!locationControls['zipcode'].errors['pattern'] &&
+                                    locationControls['zipcode'].errors['minlength']) {
+                                    <div>Zipcode must be at least 6 characters</div>
+                                    }
+                                </div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">{{ title }}</button>
+            </div>
+
+        </form>
+    </div>
+</div>

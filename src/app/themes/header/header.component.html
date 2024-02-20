@@ -1,0 +1,22 @@
+<nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+        <a class="navbar-brand pointer" routerLink="/">
+            <img src="/assets/images/logo.png" alt="Logo" width="30" height="24" class="d-inline-block align-text-top">
+            Event Management
+        </a>
+        <div *ngIf="authService.userValue" class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-left mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                        aria-expanded="false">
+                        User
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" (click)="logout()" href="javascript:void(0)">Log out</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</nav>

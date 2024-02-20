@@ -1,0 +1,30 @@
+<div class="card col-xl-5 col-lg-6 col-md-10 col-sm-12 mx-auto mt-5">
+    <div class="card-body px-lg-5 pt-4">
+        <h4 class="text-center "> Event Details </h4>
+
+        <div class="row">
+            <div class="col-6">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Type: {{ event?.type }}</li>
+                    <li class="list-group-item">Gender: {{ event?.gender }} </li>
+                    <li class="list-group-item">Date: {{ event?.date | date:'dd-MM-YYYY' }} </li>
+                </ul>
+            </div>
+            <div class="col-6">
+                <div class="imagePreview">
+                    <img [src]="event?.image" height="150" width="150">
+                </div>
+            </div>
+        </div>
+
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+                <h6>Location</h6>
+                <ng-container *ngFor="let location of event?.location | keyvalue">
+                    {{ location.key }}: {{ location.value }},
+                </ng-container>
+            </li>
+        </ul>
+
+    </div>
+</div>
