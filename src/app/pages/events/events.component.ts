@@ -15,7 +15,8 @@ export class EventsComponent implements OnInit {
   count: number = 5;
   total: number = 0;
   searchField: string = '';
-  searchPlaceholder: string = 'Search by Type...';
+  searchOnKey: string = 'type';
+  searchPlaceholder: string = `Search by ${this.searchOnKey}...`;
   columns = Columns;
   allEvents: Event[] = [];
   events: Event[] = [];

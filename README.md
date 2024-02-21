@@ -10,6 +10,21 @@ Run `npm install` for install dependencies.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
 
+
+## How to work
+# Login
+When you go to `http://localhost:4200/` it will show mobile, then you can enter any 10 digit random number, then click on send OTP, you can see OTP box, to enter OTP you again enter 6 digits. Enter. You can enter the random OTP then click on Sign In.
+
+# Home
+Here you can see list of Events.
+1) Add New:- Add New button is used to create new Event.
+2) Search Box:- You can search Events in Search Box based on Event Type.
+    # Note:- You can customize the search `other field` based on changing the `searchKey` in the `EventComponent`
+3) Laod More:- When you add more then 5 event then Load more will work and when you click on Load more it will load 5 more events on every single click.
+    # Note:- You can change the `EventComponent -> count` to optimize loading a Less/larger number of events.
+4) When you click on table body it will show Event Details.
+5) You can Edit or Delete Event.
+
 ## Code scaffolding
 
 Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
